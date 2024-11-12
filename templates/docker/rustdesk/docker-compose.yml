@@ -1,4 +1,3 @@
-# docker-compose.yml
 version: '3'
 services:
   rustdesk-server:
@@ -11,12 +10,15 @@ services:
       - 21118:21118
       - 21119:21119
     image: rustdesk/rustdesk-server-s6:latest
+    env_file:
+      - .env
+    # Example environment variables (actual values loaded from .env):
     environment:
-      - "RELAY=${RELAY}"
+      - "RELAY=${RELAY}"           # example: rustdesk.example.com
       - "ENCRYPTED_ONLY=${ENCRYPTED_ONLY:-1}"
       - "DB_URL=${DB_URL:-/db/db_v2.sqlite3}"
-      - "KEY_PRIV=${KEY_PRIV}"
-      - "KEY_PUB=${KEY_PUB}"
+      - "KEY_PRIV=${KEY_PRIV}"     # example: myprivatekey123
+      - "KEY_PUB=${KEY_PUB}"       # example: mypublickey456
     volumes:
       - ./db:/db
     restart: unless-stopped
