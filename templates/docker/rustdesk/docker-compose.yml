@@ -12,7 +12,7 @@ services:
       - 21119:21119
     image: rustdesk/rustdesk-server-s6:latest
     environment:
-      - "RELAY=${RELAY:example.rustdesk.com}"
+      - "RELAY=${RELAY}"
       - "ENCRYPTED_ONLY=${ENCRYPTED_ONLY:-1}"
       - "DB_URL=${DB_URL:-/db/db_v2.sqlite3}"
       - "KEY_PRIV=${KEY_PRIV}"
