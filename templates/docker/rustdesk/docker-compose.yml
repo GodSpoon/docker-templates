@@ -1,0 +1,22 @@
+# docker-compose.yml
+version: '3'
+services:
+  rustdesk-server:
+    container_name: rustdesk
+    ports:
+      - 21115:21115
+      - 21116:21116
+      - 21116:21116/udp
+      - 21117:21117
+      - 21118:21118
+      - 21119:21119
+    image: rustdesk/rustdesk-server-s6:latest
+    environment:
+      - "RELAY=${RELAY:example.rustdesk.com}"
+      - "ENCRYPTED_ONLY=${ENCRYPTED_ONLY:-1}"
+      - "DB_URL=${DB_URL:-/db/db_v2.sqlite3}"
+      - "KEY_PRIV=${KEY_PRIV}"
+      - "KEY_PUB=${KEY_PUB}"
+    volumes:
+      - ./db:/db
+    restart: unless-stopped
