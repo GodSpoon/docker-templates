@@ -1,0 +1,70 @@
+{
+    "categories": [
+        "Other",
+        "Tools"
+    ],
+    "description": "A remote desktop software, the open source TeamViewer alternative, works out of the box. This template includes secure key management and relay configuration.",
+    "env": [
+        {
+            "default": "rustdesk.example.com",
+            "description": "Your RustDesk relay server url",
+            "label": "RELAY",
+            "name": "RELAY"
+        },
+        {
+            "default": "1",
+            "description": "If set to \"1\" unencrypted connections will not be accepted",
+            "label": "ENCRYPTED_ONLY",
+            "name": "ENCRYPTED_ONLY"
+        },
+        {
+            "default": "/db/db_v2.sqlite3",
+            "description": "Path to the SQLite database file",
+            "label": "DB_URL",
+            "name": "DB_URL"
+        },
+        {
+            "name": "KEY_PRIV",
+            "label": "Private Key",
+            "description": "(optional) Your RustDesk server private key - keep this secure!",
+            "default": "",
+            "preset": false,
+            "select": []
+        },
+        {
+            "name": "KEY_PUB",
+            "label": "Public Key",
+            "description": "(optional) Your RustDesk server public key",
+            "default": "",
+            "preset": false,
+            "select": []
+        }
+    ],
+    "image_arm32": "rustdesk/rustdesk-server-s6:latest",
+    "image_arm64": "rustdesk/rustdesk-server-s6:latest",
+    "image_amd64": "rustdesk/rustdesk-server-s6:latest",
+    "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/rustdesk.png",
+    "name": "rustdesk",
+    "note": "SECURITY NOTICE: Make sure to set your KEY_PRIV and KEY_PUB values securely. Don't forget to open ports 21115 to 21119 in your router.",
+    "officialDoc": "https://github.com/rustdesk/rustdesk-server",
+    "platform": "linux",
+    "ports": [
+        "21115:21115/tcp",
+        "21116:21116/tcp",
+        "21116:21116/udp",
+        "21117:21117/tcp",
+        "21118:21118/tcp",
+        "21119:21119/tcp"
+    ],
+    "restart_policy": "unless-stopped",
+    "title": "RustDesk Server",
+    "type": 1,
+    "videoID": "N.15",
+    "volumes": [
+        {
+            "bind": "/portainer/Files/AppData/Config/rustdesk/db",
+            "container": "/db"
+        }
+    ],
+    "webpage": "https://rustdesk.com/"
+}
